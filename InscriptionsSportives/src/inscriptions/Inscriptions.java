@@ -242,23 +242,36 @@ public class Inscriptions implements Serializable
 	public static void main(String[] args)
 	{
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
-		Competition flechettes = inscriptions.createCompetition("Mondial de fl√©chettes", null, false);
+		Competition flechettes = inscriptions.createCompetition("Mondial de fl√©chettes", LocalDate.of(2019, 12, 12), false);
 		Personne tony = inscriptions.createPersonne("Tony", "Dent de plomb", "azerty"), 
-				boris = inscriptions.createPersonne("Boris", "le Hachoir", "ytreza");
+				 boris = inscriptions.createPersonne("Boris", "le Hachoir", "ytreza"),
+				 brahim = inscriptions.createPersonne("Brahim", "Mlaghui", "brah"),
+				 benoit = inscriptions.createPersonne("Benoit", "Valle", "ben");
+		flechettes.add(benoit);
 		flechettes.add(tony);
+		flechettes.add(brahim);
 		Equipe lesManouches = inscriptions.createEquipe("Les Manouches");
 		lesManouches.add(boris);
 		lesManouches.add(tony);
-		System.out.println(inscriptions);
-		lesManouches.delete();
-		System.out.println(inscriptions);
-		try
-		{
-			inscriptions.sauvegarder();
-		} 
-		catch (IOException e)
-		{
-			System.out.println("Sauvegarde impossible." + e);
+		//System.out.println("Inscription ouverte ? "+ flechettes.inscriptionsOuvertes());
+		//System.out.println("Date cloture: "+flechettes.getDateCloture());
+		//System.out.println("Date Systeme: "+LocalDate.now());
+		//System.out.println(inscriptions);
+		//flechettes.setDateCloture(LocalDate.of(2020,12, 12));
+		//System.out.println("Candidat dÈj‡ inscris:"+flechettes.getCandidats());
+		//System.out.println("Candidat ‡ inscrire:"+flechettes.getCandidatsAInscrire());
+		
+	//	System.out.println(flechettes.getDateCloture());
+			lesManouches.delete();
+		//	System.out.println(inscriptions);
+			try
+			{
+				inscriptions.sauvegarder();
+			} 
+			catch (IOException e)
+			{
+				System.out.println("Sauvegarde impossible." + e);
+			}
+			
 		}
-	}
 }
