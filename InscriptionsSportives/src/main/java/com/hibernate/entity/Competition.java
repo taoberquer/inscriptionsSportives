@@ -143,7 +143,10 @@ public class Competition implements Comparable<Competition>, Serializable
 		if (enEquipe || ! inscriptionsOuvertes())
 			throw new RuntimeException("Impossbile d'ajouter une personne.");
 		personne.add(this);
-		return candidats.add(personne);
+		boolean toReturn = candidats.add(personne);
+		Passerelle.save(this);
+		
+		return toReturn;
 	}
 
 	/**
@@ -160,7 +163,10 @@ public class Competition implements Comparable<Competition>, Serializable
 		if (!enEquipe || !inscriptionsOuvertes())
 			throw new RuntimeException("Impossible d'ajouter une equipe.");
 		equipe.add(this);
-		return candidats.add(equipe);
+		boolean toReturn = candidats.add(equipe);
+		Passerelle.save(this);
+		
+		return toReturn;
 	}
 	
 	/**
@@ -187,7 +193,10 @@ public class Competition implements Comparable<Competition>, Serializable
 	public boolean remove(Candidat candidat)
 	{
 		candidat.remove(this);
-		return candidats.remove(candidat);
+		boolean toReturn = candidats.remove(candidat);
+		Passerelle.save(this);
+		
+		return toReturn;
 	}
 	
 	/**

@@ -57,7 +57,10 @@ public class Equipe extends Candidat
 	public boolean add(Personne membre)
 	{
 		membre.add(this);
-		return membres.add(membre);
+		boolean toReturn = membres.add(membre);
+		Passerelle.save(this);
+		
+		return toReturn;
 	}
 
 	/**
@@ -69,7 +72,10 @@ public class Equipe extends Candidat
 	public boolean remove(Personne membre)
 	{
 		membre.remove(this);
-		return membres.remove(membre);
+		boolean toReturn = membres.remove(membre);
+		Passerelle.save(this);
+		
+		return toReturn;
 	}
 
 	/**

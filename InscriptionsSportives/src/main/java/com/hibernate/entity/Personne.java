@@ -99,12 +99,18 @@ public class Personne extends Candidat
 	boolean add(Equipe equipe)
 	{
 		
-		return equipes.add(equipe);
+		boolean toReturn = equipes.add(equipe);
+		Passerelle.save(this);
+		
+		return toReturn;
 	}
 
 	boolean remove(Equipe equipe)
 	{
-		return equipes.remove(equipe);
+		boolean toReturn = equipes.remove(equipe);
+		Passerelle.save(this);
+		
+		return toReturn;
 	}
 	
 	@Override

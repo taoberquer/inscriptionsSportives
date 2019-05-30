@@ -69,10 +69,9 @@ public class Passerelle {
 			open();
 		}
 		
-		Transaction tx = session.beginTransaction();
-		session.save(o);
-		tx.commit();
-		session.flush();
+		session.beginTransaction();
+		session.saveOrUpdate(o);
+		session.getTransaction().commit();
 	}
 
 	@SuppressWarnings("unchecked")
