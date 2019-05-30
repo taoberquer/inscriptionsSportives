@@ -6,17 +6,26 @@
 <hibernate-configuration>
     <session-factory>
   
+        <!-- Connection settings -->
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://debian.loc/inscription</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://debian.loc:5432/inscription</property>
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.connection.password">postgres</property>
+  
+        <!-- SQL dialect -->
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+  
+        <!-- Print executed SQL to stdout -->
         <property name="show_sql">true</property>
-        <property name="hibernate.hbm2ddl.auto">update</property>
-        <mapping class="inscriptions.Candidat" />
-        <mapping class="inscriptions.Competition" />
-        <mapping class="inscriptions.Equipe" />
-        <mapping class="inscriptions.Personne" />
+  
+        <!-- Update database on startup -->
+        <property name="hibernate.hbm2ddl.auto">create</property>
+  
+        <!-- Annotated entity classes -->
+        <mapping class="com.hibernate.entity.Candidat"/>
+        <mapping class="com.hibernate.entity.Competition"/>
+        <mapping class="com.hibernate.entity.Equipe"/>
+        <mapping class="com.hibernate.entity.Personne"/>
          
     </session-factory>
 </hibernate-configuration>
