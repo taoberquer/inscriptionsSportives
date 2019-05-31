@@ -27,7 +27,7 @@ import com.hibernate.connect.Passerelle;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "CANDIDAT")
+@Table(name = "candidat")
 public abstract class Candidat implements Comparable<Candidat>, Serializable
 {
 	private static final long serialVersionUID = -6035399822298694746L;
@@ -46,6 +46,8 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	joinColumns = {@JoinColumn(name = "CANDIDAT_ID", nullable = false, updatable = false) }, 
 	inverseJoinColumns = { @JoinColumn(name = "COMPETITION_ID",nullable = false, updatable = false) })
 	private Set<Competition> competitions;
+	
+	protected Candidat() {};
 	
 	Candidat(Inscriptions inscriptions, String nom)
 	{

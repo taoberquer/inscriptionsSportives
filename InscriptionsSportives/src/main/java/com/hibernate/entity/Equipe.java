@@ -22,7 +22,7 @@ import com.hibernate.connect.Passerelle;
  * s'inscrire � une comp�tition.
  * 
  */
-@Entity(name ="EQUIPE")
+@Entity(name ="equipe")
 public class Equipe extends Candidat
 {
 	private static final long serialVersionUID = 4147819927233466035L;
@@ -33,6 +33,8 @@ public class Equipe extends Candidat
 	inverseJoinColumns = { @JoinColumn(name = "PERSONNE_ID",nullable = false, updatable = false) })
 	@Sort(type = SortType.NATURAL)
 	private SortedSet<Personne> membres = new TreeSet<>();
+	
+	protected Equipe() {}
 	
 	Equipe(Inscriptions inscriptions, String nom)
 	{

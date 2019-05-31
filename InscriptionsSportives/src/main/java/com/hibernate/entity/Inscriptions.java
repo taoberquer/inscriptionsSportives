@@ -7,11 +7,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.*; 
 
 import javax.persistence.Entity;
+
+import com.hibernate.connect.Passerelle;
 
 /**
  * Point d'entrée dans l'application, un seul objet de type Inscription
@@ -19,7 +21,7 @@ import javax.persistence.Entity;
  * ainsi que d'inscrire des candidats à des compétition.
  */
 
-@Entity(name = "INSCRIPTION")
+
 public class Inscriptions implements Serializable
 {
 	private static final long serialVersionUID = -3095339436048473524L;
@@ -40,7 +42,7 @@ public class Inscriptions implements Serializable
 	
 	public SortedSet<Competition> getCompetitions()
 	{
-		return Collections.unmodifiableSortedSet(competitions);
+		return convertListToSet(Passerelle.getData("Competition"));
 	}
 	
 	/**
@@ -50,7 +52,7 @@ public class Inscriptions implements Serializable
 	
 	public SortedSet<Candidat> getCandidats()
 	{
-		return Collections.unmodifiableSortedSet(candidats);
+		return convertListToSet(Passerelle.getData("Candidat"));
 	}
 
 	/**
@@ -60,11 +62,7 @@ public class Inscriptions implements Serializable
 	
 	public SortedSet<Personne> getPersonnes()
 	{
-		SortedSet<Personne> personnes = new TreeSet<>();
-		for (Candidat c : getCandidats())
-			if (c instanceof Personne)
-				personnes.add((Personne)c);
-		return Collections.unmodifiableSortedSet(personnes);
+		return convertListToSet(Passerelle.getData("Personne"));
 	}
 
 	/**
@@ -74,12 +72,17 @@ public class Inscriptions implements Serializable
 	
 	public SortedSet<Equipe> getEquipes()
 	{
-		SortedSet<Equipe> equipes = new TreeSet<>();
-		for (Candidat c : getCandidats())
-			if (c instanceof Equipe)
-				equipes.add((Equipe)c);
-		return Collections.unmodifiableSortedSet(equipes);
+		return convertListToSet(Passerelle.getData("Equipe"));
 	}
+	
+    public <T> SortedSet<T> convertListToSet(List<T> list) 
+    { 
+    	SortedSet<T> set = new TreeSet<>(); 
+        for (T t : list) 
+            set.add(t); 
+  
+        return set; 
+    } 
 
 	/**
 	 * Créée une compétition. Ceci est le seul moyen, il n'y a pas

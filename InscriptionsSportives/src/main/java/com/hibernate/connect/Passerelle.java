@@ -77,6 +77,10 @@ public class Passerelle {
 	@SuppressWarnings("unchecked")
 	public static <T> List<T> getData(String className)
 	{
+		if (!isOpened()) {
+			open();
+		}
+		
 		Query query = session.createQuery("from " + className);
 		return new ArrayList<T>((List<T>) query.list());
 	}
@@ -84,6 +88,10 @@ public class Passerelle {
 	@SuppressWarnings("unchecked")
 	public static <T> T getData(String className, int id)
 	{
+		if (!isOpened()) {
+			open();
+		}
+		
 		Query query = session.createQuery("from " + className + " where num = " + id);
 		return (T) (query.list().get(0));
 	}

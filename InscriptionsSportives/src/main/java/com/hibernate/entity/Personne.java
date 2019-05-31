@@ -21,7 +21,7 @@ import org.hibernate.annotations.Cascade;
 /**
  * Repr�sente une personne physique pouvant s'inscrire � une comp�tition.
  */
-@Entity(name = "PERSONNE")
+@Entity(name = "personne")
 public class Personne extends Candidat
 {
 	private static final long serialVersionUID = 4434646724271327254L;
@@ -34,6 +34,8 @@ public class Personne extends Candidat
 	
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "membres")
 	private Set<Equipe> equipes;
+	
+	protected Personne() {};
 	
 	Personne(Inscriptions inscriptions, String nom, String prenom, String mail)
 	{

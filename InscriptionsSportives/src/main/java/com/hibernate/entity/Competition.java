@@ -21,7 +21,7 @@ import com.hibernate.connect.Passerelle;
  * inscrits � un �v�nement, les inscriptions sont closes � la date dateCloture.
  *
  */
-@Entity(name = "COMPETITION")
+@Entity(name = "competition")
 public class Competition implements Comparable<Competition>, Serializable
 {
 	private static final long serialVersionUID = -2882150118573759729L;
@@ -38,6 +38,8 @@ public class Competition implements Comparable<Competition>, Serializable
 	private Inscriptions inscriptions;
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "competitions")
 	private Set<Candidat> candidats;
+	
+	protected Competition() {}
 
 	Competition(Inscriptions inscriptions, String nom, LocalDate dateCloture, boolean enEquipe)
 	{
