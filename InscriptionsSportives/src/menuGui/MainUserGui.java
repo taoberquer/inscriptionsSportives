@@ -16,7 +16,6 @@ public class MainUserGui extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			primaryStage.setTitle("Inscriptions Sportives");
-			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
