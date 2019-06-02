@@ -13,6 +13,31 @@ inscriptionsSportives est un projet java qui a été imposé comme base de dépa
 
 De plus il nous été imposé d'utilisé [Hibernate](https://hibernate.org/) comme ORM. 
 
+## Décomposition du projet
+
+Le projet se décompose en 4 itérations majeure.
+
+###### Itération 1
+- Tests unitaires
+- Ajout des fonctionalités manquantes, indiquées dans le code avec des //TODO
+- Ajout d’exceptions dans la couche métier pour gérer les erreurs
+- Modélisation de la base de données
+- MCD
+
+###### Itération 2
+  - Création d’une base de données
+  - Installation de la base de données sur un serveur
+  - Mise en place d’un dialogue utilisateur à l’aide de la bibliothèque [CommandLine](https://github.com/alexandreMesle/CommandLine)
+  
+###### Itération 3
+  - Connexion à la base de données avec Hibernate
+  - Réflexion sur le maquettage des fenêtres
+
+###### Itération 4
+  - Développement d’une IHM en Java (Swing)
+  - Documentation utilisateur
+
+  
 ## Installation 
 
 #### Prérequis
@@ -29,6 +54,8 @@ De plus il nous été imposé d'utilisé [Hibernate](https://hibernate.org/) com
 - Dans le dossier `src/main/ressources` copiez le fichier `hibernate.cfg.xml.example` en `hibernate.cfg.xml`.
 
 - Configurez le fichier `hibernate.cfg.xml` pour qu'il puisse avoir accès à la base de donnée PostgreSQL.
+
+- L'application possède deux mode de lancement une version cli et une version graphique. 
 ## Auteurs
 
 * **Tao Berquer** - [www.taoberquer.fr](https://www.taoberquer.fr/)
