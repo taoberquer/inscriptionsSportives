@@ -22,7 +22,7 @@ import com.hibernate.connect.Passerelle;
  * s'inscrire � une comp�tition.
  * 
  */
-@Entity(name ="equipe")
+@Entity(name ="Equipe")
 public class Equipe extends Candidat
 {
 	private static final long serialVersionUID = 4147819927233466035L;

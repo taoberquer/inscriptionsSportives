@@ -1,7 +1,5 @@
 package com.tableModel.list;
 
-import java.util.List;
-
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 
@@ -25,10 +23,13 @@ public abstract class ListTableModel extends AbstractTableModel{
 
     @Override
     public abstract Object getValueAt(int rowIndex, int index);
+    
+    @Override
+    public abstract String getColumnName(int index);
 
     @Override
     public void setValueAt(Object aValue, int rowIndex, int index) { }
-
+    
     @Override
     public void addTableModelListener(TableModelListener l) { }
 

@@ -21,7 +21,7 @@ import org.hibernate.annotations.Cascade;
 /**
  * Repr�sente une personne physique pouvant s'inscrire � une comp�tition.
  */
-@Entity(name = "personne")
+@Entity(name = "Personne")
 public class Personne extends Candidat
 {
 	private static final long serialVersionUID = 4434646724271327254L;
