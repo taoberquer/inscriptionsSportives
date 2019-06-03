@@ -3,6 +3,7 @@ package com.swing.panel;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JPanel;
 import javax.swing.JTable;
 
 import com.hibernate.entity.Competition;
@@ -54,7 +55,8 @@ public class CompetitionsIndex extends IndexTemplate {
 
 	@Override
 	protected JPanelEdit getJPanelEdit() {
-		return new JPanelEditCompetition();
+		Competition competition = getListTable().get(table.getSelectedRow());
+		return new JPanelEditCompetition(competition);		
 	}
 
 	@Override

@@ -13,11 +13,14 @@ import java.time.LocalDate;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import com.hibernate.entity.Inscriptions;
 
 public class JPanelCreateCompetition extends JPanelCreate{
 
@@ -28,11 +31,14 @@ public class JPanelCreateCompetition extends JPanelCreate{
 	JTextField jTextMonth = new JTextField();
 	JTextField jTextYear = new JTextField();
 	
+	JCheckBox jCheckBoxEquipe = new JCheckBox("En équipe");
+	
 	JLabel jLabelSave = new JLabel("Save");
 	JLabel jLabelCancel = new JLabel("Cancel");
 
 	public JPanelCreateCompetition() {
 		setView();
+		setEventListeners();
 	}
 
 	@Override
@@ -63,7 +69,7 @@ public class JPanelCreateCompetition extends JPanelCreate{
 		jPanelCenter.add(containerInfoInputPanelBottom);
 		containerInfoInputPanelBottom.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
-		JLabel jLabelDate = new JLabel("Date du début");
+		JLabel jLabelDate = new JLabel("Date de fin");
 		jLabelDate.setAlignmentX(Component.CENTER_ALIGNMENT);
 		jLabelDate.setForeground(Color.WHITE);
 		jLabelDate.setFont(new Font("Roboto", Font.PLAIN, 20));
@@ -123,18 +129,23 @@ public class JPanelCreateCompetition extends JPanelCreate{
 		jLabelCancel.setBackground(new Color(231, 76, 60));
 		jLabelCancel.setAlignmentX(0.5f);
 		jPanelButton.add(jLabelCancel);
-		
-		setEventListeners();
+
+		jPanelCenter.add(jCheckBoxEquipe);
 	}
 
 	@Override
 	protected void add() {
 		String name = jTextName.getText();
 		LocalDate dateFin = LocalDate.of(
-				Integer.parseInt(jTextDay.getText()), 
+				Integer.parseInt(jTextYear.getText()),
 				Integer.parseInt(jTextMonth.getText()), 
-				Integer.parseInt(jTextYear.getText())
+				Integer.parseInt(jTextDay.getText())
 		);
+		Boolean enEquipe = jCheckBoxEquipe.isSelected();
+		
+		Inscriptions.getInscriptions().createCompetition(name, dateFin, enEquipe);
+
+		setVisible(false);
 		
 	}
 

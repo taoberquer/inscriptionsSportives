@@ -150,7 +150,9 @@ public abstract class IndexTemplate extends JFrameTemplate {
 		jLabelUpdateButton.addMouseListener( new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				setUpEditView();
+				if (table.getSelectedRow() >= 0) {
+					setUpEditView();
+				}
 			}
 		});
 		
