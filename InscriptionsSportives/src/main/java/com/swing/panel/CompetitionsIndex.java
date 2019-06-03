@@ -1,13 +1,19 @@
 package com.swing.panel;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.JTable;
 
-public class CompetitionsIndex extends JFrameTemplate {
+import com.hibernate.entity.Competition;
+import com.hibernate.entity.Inscriptions;
+import com.swing.jPanel.JPanelCreate;
+import com.swing.jPanel.JPanelCreateCompetition;
+import com.swing.jPanel.JPanelEdit;
+import com.swing.jPanel.JPanelEditCompetition;
+import com.tableModel.list.CompetitionListTableModel;
+
+public class CompetitionsIndex extends IndexTemplate {
 
 	private static final long serialVersionUID = 3922912440270483462L;
 	
@@ -24,5 +30,37 @@ public class CompetitionsIndex extends JFrameTemplate {
 	protected void setTitle() {
 		super.setTitle(super.title + " - Competitions");
 	}
+
+	@Override
+	protected JTable getTableContent() {
+		this.table = new JTable(new CompetitionListTableModel(getListTable()));
+		
+		return this.table;
+	}
+
+	protected List<Competition> getListTable() {
+		return new ArrayList<>(Inscriptions.getInscriptions().getCompetitions());
+	}
+	
+	protected void update() {
+		table.setModel(new CompetitionListTableModel(getListTable()));
+	}
+
+	@Override
+	protected void deleteSelectedRow(int index) {
+		Competition competition = getListTable().get(table.getSelectedRow());
+		competition.delete();	
+	}
+
+	@Override
+	protected JPanelEdit getJPanelEdit() {
+		return new JPanelEditCompetition();
+	}
+
+	@Override
+	protected JPanelCreate getJPanelCreate() {
+		return new JPanelCreateCompetition();
+	}
+	
 
 }

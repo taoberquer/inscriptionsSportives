@@ -21,7 +21,7 @@ import com.hibernate.connect.Passerelle;
  * inscrits � un �v�nement, les inscriptions sont closes � la date dateCloture.
  *
  */
-@Entity(name = "competition")
+@Entity(name = "Competition")
 public class Competition implements Comparable<Competition>, Serializable
 {
 	private static final long serialVersionUID = -2882150118573759729L;
@@ -209,7 +209,6 @@ public class Competition implements Comparable<Competition>, Serializable
 	{
 		for (Candidat candidat : candidats)
 			remove(candidat);
-		inscriptions.delete(this);
 		Passerelle.delete(this);
 	}
 	
