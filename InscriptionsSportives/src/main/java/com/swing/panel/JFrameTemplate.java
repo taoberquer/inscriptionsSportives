@@ -20,11 +20,13 @@ public abstract class JFrameTemplate extends JFrame {
 	private static final long serialVersionUID = 3810875946998611120L;
 	
 	private JPanel contentPane;
+	protected Boolean connected = false;
 	protected String title = "Inscriptions Sportives";
 	protected String activeMenulLabel;
 	protected JLabel Personnes = new JLabel("Personnes");
 	protected JLabel Equipes = new JLabel("Equipes");
 	protected JLabel Competitions = new JLabel("Competitions");
+	JPanel headerPanel = new JPanel();
 
 	public JFrameTemplate(JFrameTemplate parentJFrame) {
 		this.launchWithParent(parentJFrame);
@@ -49,9 +51,14 @@ public abstract class JFrameTemplate extends JFrame {
 		this.setEventListeners();
 	}
 	
+	public Boolean isConected() {
+		return connected;
+	}
+	
 	protected void launchWithParent(JFrameTemplate parentJFrame) {
-		this.launch();
 		setLocationRelativeTo(parentJFrame);
+		connected = parentJFrame.isConected();
+		this.launch();
 	}
 
 	protected void setConfig() {
@@ -68,11 +75,12 @@ public abstract class JFrameTemplate extends JFrame {
 	protected abstract void setTitle();
 	
 	protected JPanel getHeaderPanel() {
-		JPanel headerPanel = new JPanel();
 		headerPanel.setBackground(new Color(250, 211, 144));	
-		headerPanel.add(this.setMenuLabel(this.Personnes));
-		headerPanel.add(this.setMenuLabel(this.Equipes));
-		headerPanel.add(this.setMenuLabel(this.Competitions));
+		if (isConected()) {
+			headerPanel.add(this.setMenuLabel(this.Personnes));
+			headerPanel.add(this.setMenuLabel(this.Equipes));
+			headerPanel.add(this.setMenuLabel(this.Competitions));
+		}
 		
 		return headerPanel;
 	}
@@ -158,6 +166,13 @@ public abstract class JFrameTemplate extends JFrame {
 				jLabel.setForeground(color);
 			}
 		});
+	}
+	
+	protected void goToHome() {
+//		Home home = new Home();
+//		home.setVisible(true);
+		setVisible(false);
+		dispose();
 	}
 
 }
