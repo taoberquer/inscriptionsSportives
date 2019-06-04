@@ -113,15 +113,21 @@ public abstract class IndexTemplate extends JFrameTemplate {
 	protected void setActionButtons(JPanel jPanel) {
 		jLabelAddButton = new JLabel("Ajouter");
 		this.setButtonLabel(jLabelAddButton, new Color(11, 197, 39));
-		jPanel.add(this.jLabelAddButton);
+		if (isConected() && isAdmin()) {
+			jPanel.add(this.jLabelAddButton);
+		}
 
 		jLabelUpdateButton = new JLabel("Modifier");
 		this.setButtonLabel(this.jLabelUpdateButton, new Color(42, 48, 240));
-		jPanel.add(this.jLabelUpdateButton);
+		if (isConected() && isAdmin()) {
+			jPanel.add(this.jLabelUpdateButton);
+		}
 
 		jLabelDeleteButton = new JLabel("Supprimer");
 		this.setButtonLabel(this.jLabelDeleteButton, new Color(217, 20, 65));
-		jPanel.add(this.jLabelDeleteButton);		
+		if (isConected() && isAdmin()) {
+			jPanel.add(this.jLabelDeleteButton);	
+		}
 	}
 	
 	protected void setButtonLabel(JLabel jLabel, Color color) {

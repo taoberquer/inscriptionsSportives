@@ -2,7 +2,7 @@ package com.swing.panel;
 
 import java.awt.EventQueue;
 
-import com.hibernate.entity.Inscriptions;
+import com.hibernate.connect.Passerelle;
 
 public class Main {
 	/**
@@ -12,7 +12,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Inscriptions.getInscriptions().getCompetitions();
+					Passerelle.open();
 					Home frame = new Home();
 					frame.setVisible(true);
 				} catch (Exception e) {

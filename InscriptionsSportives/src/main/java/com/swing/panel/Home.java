@@ -15,6 +15,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import com.hibernate.entity.Inscriptions;
+
 public class Home extends JFrameTemplate {
 
 	private static final long serialVersionUID = -2350059206384737088L;
@@ -43,14 +45,14 @@ public class Home extends JFrameTemplate {
 		jPanelCenter.setBackground(new Color(207, 157, 73));
 		add(jPanelCenter, BorderLayout.CENTER);
 		
-		JLabel jLabelLogin = new JLabel("Nom d'utilisateur :");
+		JLabel jLabelLogin = new JLabel("Email de l'utilisateur :");
 		jLabelLogin.setBorder(new EmptyBorder(0, 0, 10, 0));
 		jLabelLogin.setForeground(Color.WHITE);
 		jLabelLogin.setFont(new Font("Roboto", Font.PLAIN, 20));
 		jPanelCenter.add(jLabelLogin);
 	
 		jTextLogin.setPreferredSize(new Dimension(10, 30));
-		jTextLogin.setToolTipText("Login");
+		jTextLogin.setToolTipText("Email");
 		jTextLogin.setHorizontalAlignment(SwingConstants.LEFT);
 		jTextLogin.setColumns(20);
 		jPanelCenter.add(jTextLogin);
@@ -107,13 +109,33 @@ public class Home extends JFrameTemplate {
 	}
 
 	protected void connect() {
-		if (jTextLogin.getText().equals("admin") && jTextPassword.getText().equals("admin")) {
-			connected = true;
-			Home home = new Home(this);
-			home.setVisible(true);
-			dispose();
-			
+		String login = jTextLogin.getText();
+		if (jTextLogin.getText().equals("admin@admin.com")) {
+			if (jTextPassword.getText().equals("Admin")) {
+				setAdminConnection();
+			}			
 		}
+		else {
+			if (Inscriptions.getInscriptions().findPersonneByEmail(login) != null) {
+				connectedUser = Inscriptions.getInscriptions().findPersonneByEmail(login);
+				setConnection();
+			}
+		}
+		
+		jTextLogin.setText("");
+		jTextPassword.setText("");
+	}
+	
+	protected void setAdminConnection() {
+		admin = true;
+		setConnection();
+	}
+	
+	protected void setConnection() {
+		connected = true;
+		Home home = new Home(this);
+		home.setVisible(true);
+		dispose();
 	}
 	
 	protected void setTitle() {

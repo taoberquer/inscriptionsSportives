@@ -39,6 +39,10 @@ public class EquipesIndex extends IndexTemplate {
 	}
 
 	protected List<Equipe> getListTable() {
+		if (isConected() && !isAdmin()) {
+			return new ArrayList<Equipe>(connectedUser.getEquipes());
+		}
+		
 		return new ArrayList<>(Inscriptions.getInscriptions().getEquipes());
 	}
 	

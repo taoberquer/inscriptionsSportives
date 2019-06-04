@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.hibernate.entity.Personne;
+
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -21,6 +23,8 @@ public abstract class JFrameTemplate extends JFrame {
 	
 	private JPanel contentPane;
 	protected Boolean connected = false;
+	protected Boolean admin = false;
+	protected Personne connectedUser;
 	protected String title = "Inscriptions Sportives";
 	protected String activeMenulLabel;
 	protected JLabel Personnes = new JLabel("Personnes");
@@ -55,9 +59,15 @@ public abstract class JFrameTemplate extends JFrame {
 		return connected;
 	}
 	
+	public Boolean isAdmin() {
+		return admin;
+	}
+	
 	protected void launchWithParent(JFrameTemplate parentJFrame) {
 		setLocationRelativeTo(parentJFrame);
 		connected = parentJFrame.isConected();
+		admin = parentJFrame.isAdmin();
+		connectedUser = parentJFrame.getConnectedUser();
 		this.launch();
 	}
 
@@ -70,6 +80,10 @@ public abstract class JFrameTemplate extends JFrame {
 		contentPane.setBorder(null);
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));		
+	}
+	
+	public Personne getConnectedUser() {
+		return connectedUser;
 	}
 	
 	protected abstract void setTitle();
@@ -166,13 +180,6 @@ public abstract class JFrameTemplate extends JFrame {
 				jLabel.setForeground(color);
 			}
 		});
-	}
-	
-	protected void goToHome() {
-//		Home home = new Home();
-//		home.setVisible(true);
-		setVisible(false);
-		dispose();
 	}
 
 }

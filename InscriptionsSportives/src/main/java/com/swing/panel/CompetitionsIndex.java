@@ -40,6 +40,10 @@ public class CompetitionsIndex extends IndexTemplate {
 	}
 
 	protected List<Competition> getListTable() {
+		if (isConected() && !isAdmin()) {
+			return new ArrayList<Competition>(connectedUser.getCompetitions());			
+		}
+		
 		return new ArrayList<>(Inscriptions.getInscriptions().getCompetitions());
 	}
 	

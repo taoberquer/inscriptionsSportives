@@ -37,6 +37,13 @@ public class PersonnesIndex extends IndexTemplate{
 	}
 
 	protected List<Personne> getListTable() {
+		if (isConected() && !isAdmin()) {
+			ArrayList<Personne> arrayList =  new ArrayList<>();		
+			arrayList.add(connectedUser);
+			
+			return arrayList;
+		}
+		
 		return new ArrayList<>(Inscriptions.getInscriptions().getPersonnes());
 	}
 	

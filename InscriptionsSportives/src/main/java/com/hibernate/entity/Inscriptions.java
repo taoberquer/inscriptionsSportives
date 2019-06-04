@@ -64,7 +64,17 @@ public class Inscriptions implements Serializable
 	{
 		return convertListToSet(Passerelle.getData("Personne"));
 	}
-
+	
+	public Personne findPersonneByEmail(String email)
+	{
+		for (Personne personne : getPersonnes()) {
+			if (personne.getMail().equals(email)) {
+				return personne;
+			}
+		}
+		
+		return null;
+	}
 	/**
 	 * Retourne toutes les équipes.
 	 * @return
